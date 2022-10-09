@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using TextCopy;
 
-namespace AtCoderHelper.CodeFormatters;
+namespace TerryU16.AtCoderHelper.CodeFormatters;
 
 public class CodeFormatter
 {
