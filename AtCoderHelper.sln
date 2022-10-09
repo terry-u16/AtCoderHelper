@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtCoderHelper", "AtCoderHelper\AtCoderHelper.csproj", "{700EEC4E-B98E-4BE8-B58C-B70925B16F95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtCoderHelper.TestCases", "AtCoderHelper.TestCases\AtCoderHelper.TestCases.csproj", "{2FE04249-F0B1-4850-820E-52B9AD96C379}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{700EEC4E-B98E-4BE8-B58C-B70925B16F95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{700EEC4E-B98E-4BE8-B58C-B70925B16F95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{700EEC4E-B98E-4BE8-B58C-B70925B16F95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{700EEC4E-B98E-4BE8-B58C-B70925B16F95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FE04249-F0B1-4850-820E-52B9AD96C379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FE04249-F0B1-4850-820E-52B9AD96C379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FE04249-F0B1-4850-820E-52B9AD96C379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FE04249-F0B1-4850-820E-52B9AD96C379}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E13DB3F4-509E-49BC-89B2-932B0D43F97F}
+	EndGlobalSection
+EndGlobal
