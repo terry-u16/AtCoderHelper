@@ -9,4 +9,8 @@
     <AssemblyName>TerryU16.$(MSBuildProjectName)</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AtCoderHelper.TestCases\AtCoderHelper.TestCases.csproj" />
+  </ItemGroup>
+
 </Project>

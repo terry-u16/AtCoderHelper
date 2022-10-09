@@ -57,11 +57,11 @@ internal class AtCoderTestCaseClient
         }
     }
 
-    public async Task<TestCase[]> GetTestCasesAsync(string contestName, string questionName)
+    public async Task<TestCase[]> GetTestCasesAsync(string contestName, string problemName)
     {
         contestName = contestName.ToLower();
-        questionName = questionName.ToLower();
-        var uri = await GetQuestionUriAsync(contestName, questionName);
+        problemName = problemName.ToLower();
+        var uri = await GetQuestionUriAsync(contestName, problemName);
 
         using var result = await _client.GetAsync(uri);
 
