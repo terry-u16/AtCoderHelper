@@ -7,6 +7,17 @@
     <Nullable>enable</Nullable>
     <RootNamespace>TerryU16.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <AssemblyName>TerryU16.$(MSBuildProjectName)</AssemblyName>
+    <PackAsTool>True</PackAsTool>
+    <ToolCommandName>ac-helper</ToolCommandName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ConsoleAppFramework" Version="4.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AtCoderHelper.CodeFormatters\AtCoderHelper.CodeFormatters.csproj" />
+    <ProjectReference Include="..\AtCoderHelper.TestCases\AtCoderHelper.TestCases.csproj" />
+  </ItemGroup>
 
 </Project>
