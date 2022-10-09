@@ -7,6 +7,8 @@
     <Nullable>enable</Nullable>
     <RootNamespace>TerryU16.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
     <AssemblyName>TerryU16.$(MSBuildProjectName)</AssemblyName>
+    <PackAsTool>True</PackAsTool>
+    <ToolCommandName>ac-helper</ToolCommandName>
   </PropertyGroup>
 
   <ItemGroup>
