@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtCoderHelper", "AtCoderHel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtCoderHelper.TestCases", "AtCoderHelper.TestCases\AtCoderHelper.TestCases.csproj", "{2FE04249-F0B1-4850-820E-52B9AD96C379}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtCoderHelper.TestCases.Test", "AtCoderHelper.TestCases.Test\AtCoderHelper.TestCases.Test.csproj", "{C672DD59-AC8A-416A-B053-5DB7591FE355}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2FE04249-F0B1-4850-820E-52B9AD96C379}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FE04249-F0B1-4850-820E-52B9AD96C379}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FE04249-F0B1-4850-820E-52B9AD96C379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C672DD59-AC8A-416A-B053-5DB7591FE355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C672DD59-AC8A-416A-B053-5DB7591FE355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C672DD59-AC8A-416A-B053-5DB7591FE355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C672DD59-AC8A-416A-B053-5DB7591FE355}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
