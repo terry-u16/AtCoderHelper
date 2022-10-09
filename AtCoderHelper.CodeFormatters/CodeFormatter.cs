@@ -10,7 +10,7 @@ public class CodeFormatter
     private const string SolverDirectoryName = "Problems";
     private readonly static Regex _usingRegex = new(@"^using \S+?;$");
 
-    public async Task ConcatAsync(string problemName)
+    public async Task ConcatAsync(string problemName, CancellationToken ct = default)
     {
         var solverName = $"Problem{problemName.ToUpper()}";
         var solverFileName = $"{solverName}.cs";
@@ -20,32 +20,32 @@ public class CodeFormatter
         if (!File.Exists(solverPath))
         {
             WriteLineWithColor($"{solverFileName} not found.", ConsoleColor.Red);
-            await BeepAsync();
+            await BeepAsync(ct);
             return;
         }
 
         if (!File.Exists(programFilePath))
         {
             WriteLineWithColor($"{ProgramFileName} not found.", ConsoleColor.Red);
-            await BeepAsync();
+            await BeepAsync(ct);
             return;
         }
 
-        var output = new StringBuilder(await File.ReadAllTextAsync(solverPath));
-        var programFileContents = await File.ReadAllLinesAsync(programFilePath);
+        var output = new StringBuilder(await File.ReadAllTextAsync(solverPath, ct));
+        var programFileContents = await File.ReadAllLinesAsync(programFilePath, ct);
         var solverConstructor = $"{solverName}();";
 
         if (!programFileContents.Any(line => line.Contains(solverConstructor)))
         {
             WriteLineWithColor($"{solverName} not found in {ProgramFileName}.", ConsoleColor.Red);
-            await BeepAsync();
+            await BeepAsync(ct);
             return;
         }
 
         if (programFileContents.Any(line => line.Contains("new FileStream")))
         {
             WriteLineWithColor($"Warning! FileStream was detected.", ConsoleColor.Yellow);
-            await BeepAsync();
+            await BeepAsync(ct);
         }
 
         foreach (var line in programFileContents.Where(line => !_usingRegex.IsMatch(line)))
@@ -53,7 +53,7 @@ public class CodeFormatter
             output.AppendLine(line);
         }
 
-        await ClipboardService.SetTextAsync(output.ToString());
+        await ClipboardService.SetTextAsync(output.ToString(), ct);
         WriteLineWithColor($"{solverName} was copied to clipboard.", ConsoleColor.Cyan);
     }
 
@@ -70,7 +70,7 @@ public class CodeFormatter
         }
     }
 
-    private static async Task BeepAsync()
+    private static async Task BeepAsync(CancellationToken ct = default)
     {
         if (!OperatingSystem.IsWindows())
         {
@@ -80,7 +80,7 @@ public class CodeFormatter
         for (int i = 0; i < 3; i++)
         {
             Console.Beep(800, 400);
-            await Task.Delay(100);
+            await Task.Delay(100, ct);
         }
     }
 }

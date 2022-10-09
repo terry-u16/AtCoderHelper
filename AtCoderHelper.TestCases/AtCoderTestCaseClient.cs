@@ -27,14 +27,14 @@ internal class AtCoderTestCaseClient
         LoggedIn = false;
     }
 
-    public async Task<bool> LoginAsync(LoginCredential credential)
+    public async Task<bool> LoginAsync(LoginCredential credential, CancellationToken ct = default)
     {
         var loginUri = new Uri("login", UriKind.Relative);
-        using var loginFormResult = await _client.GetAsync(loginUri);
+        using var loginFormResult = await _client.GetAsync(loginUri, ct);
 
         if (loginFormResult.IsSuccessStatusCode)
         {
-            using var stream = await loginFormResult.Content.ReadAsStreamAsync();
+            using var stream = await loginFormResult.Content.ReadAsStreamAsync(ct);
             var parser = new HtmlParser();
             var html = await parser.ParseDocumentAsync(stream);
             var csrfTokenInput = html.QuerySelectorAll("input").First(e => e.Attributes["type"]?.Value == "hidden" && e.Attributes["name"]?.Value == "csrf_token");
@@ -47,7 +47,7 @@ internal class AtCoderTestCaseClient
                         { "csrf_token", csrfToken ?? "" }
                     });
 
-            var loginResult = await _client.PostAsync(loginUri, loginContent);
+            var loginResult = await _client.PostAsync(loginUri, loginContent, ct);
             LoggedIn = loginResult.IsSuccessStatusCode && loginResult.RequestMessage?.RequestUri?.AbsoluteUri == "https://atcoder.jp/home";
             return LoggedIn;
         }
@@ -57,18 +57,18 @@ internal class AtCoderTestCaseClient
         }
     }
 
-    public async Task<TestCase[]> GetTestCasesAsync(string contestName, string problemName)
+    public async Task<TestCase[]> GetTestCasesAsync(string contestName, string problemName, CancellationToken ct = default)
     {
         contestName = contestName.ToLower();
         problemName = problemName.ToLower();
-        var uri = await GetQuestionUriAsync(contestName, problemName);
+        var uri = await GetQuestionUriAsync(contestName, problemName, ct);
 
-        using var result = await _client.GetAsync(uri);
+        using var result = await _client.GetAsync(uri, ct);
 
         if (result.IsSuccessStatusCode)
         {
             var testCases = new List<TestCase>();
-            using var stream = await result.Content.ReadAsStreamAsync();
+            using var stream = await result.Content.ReadAsStreamAsync(ct);
             var parser = new HtmlParser();
             var doc = await parser.ParseDocumentAsync(stream);
 
@@ -83,14 +83,14 @@ internal class AtCoderTestCaseClient
         }
     }
 
-    private async Task<Uri> GetQuestionUriAsync(string contestName, string questionName)
+    private async Task<Uri> GetQuestionUriAsync(string contestName, string questionName, CancellationToken ct = default)
     {
         var endPoint = new Uri($"contests/{contestName}/tasks", UriKind.Relative);
-        using var result = await _client.GetAsync(endPoint);
+        using var result = await _client.GetAsync(endPoint, ct);
 
         if (result.IsSuccessStatusCode)
         {
-            using var stream = await result.Content.ReadAsStreamAsync();
+            using var stream = await result.Content.ReadAsStreamAsync(ct);
             var parser = new HtmlParser();
             var html = await parser.ParseDocumentAsync(stream);
 

@@ -8,7 +8,7 @@ internal class CredentialManager
     const string aesKey = "+GhvQZ#Fu4CAd!P,";
     const int KeyLength = 16;
 
-    public async Task SaveCredentialAsync(Stream stream, LoginCredential credential)
+    public async Task SaveCredentialAsync(Stream stream, LoginCredential credential, CancellationToken ct = default)
     {
         using var aes = Aes.Create();
         var deriveBytes = new Rfc2898DeriveBytes(aesKey, KeyLength);
@@ -17,19 +17,19 @@ internal class CredentialManager
         aes.GenerateIV();
         var encryptor = aes.CreateEncryptor();
 
-        await stream.WriteAsync(deriveBytes.Salt);
-        await stream.WriteAsync(aes.IV);
+        await stream.WriteAsync(deriveBytes.Salt, ct);
+        await stream.WriteAsync(aes.IV, ct);
         var cryptoStream = new CryptoStream(stream, encryptor, CryptoStreamMode.Write);
-        await MessagePackSerializer.SerializeAsync(cryptoStream, credential);
-        await cryptoStream.FlushFinalBlockAsync();
+        await MessagePackSerializer.SerializeAsync(cryptoStream, credential, cancellationToken: ct);
+        await cryptoStream.FlushFinalBlockAsync(ct);
     }
 
-    public async Task<LoginCredential> LoadCredendialAsync(Stream stream)
+    public async Task<LoginCredential> LoadCredendialAsync(Stream stream, CancellationToken ct = default)
     {
         var salt = new byte[KeyLength];
-        await stream.ReadAsync(salt);
+        await stream.ReadAsync(salt, ct);
         var iv = new byte[KeyLength];
-        await stream.ReadAsync(iv);
+        await stream.ReadAsync(iv, ct);
 
         using var aes = Aes.Create();
         aes.IV = iv;
@@ -39,7 +39,7 @@ internal class CredentialManager
 
         var dectyptor = aes.CreateDecryptor();
         var cryptoStream = new CryptoStream(stream, dectyptor, CryptoStreamMode.Read);
-        var credential = await MessagePackSerializer.DeserializeAsync<LoginCredential>(cryptoStream);
+        var credential = await MessagePackSerializer.DeserializeAsync<LoginCredential>(cryptoStream, cancellationToken: ct);
         return credential;
     }
 }
