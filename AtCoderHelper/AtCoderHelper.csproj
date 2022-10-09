@@ -10,6 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ConsoleAppFramework" Version="4.2.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AtCoderHelper.CodeFormatters\AtCoderHelper.CodeFormatters.csproj" />
     <ProjectReference Include="..\AtCoderHelper.TestCases\AtCoderHelper.TestCases.csproj" />
   </ItemGroup>
 

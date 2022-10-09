@@ -2,7 +2,7 @@
 
 namespace TerryU16.AtCoderHelper.TestCases;
 
-internal class TestCaseManager
+public class TestCaseManager
 {
     private readonly string _credentialPath;
     private readonly AtCoderTestCaseClient _client;
