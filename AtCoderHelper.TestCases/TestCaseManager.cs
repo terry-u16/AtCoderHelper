@@ -58,7 +58,7 @@ public class TestCaseManager
 
     private async Task<LoginCredential?> TryGetCredentialAsync(CancellationToken ct = default)
     {
-        if (File.Exists(_credentialPath))
+        if (!File.Exists(_credentialPath))
         {
             return null;
         }
